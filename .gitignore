@@ -60,3 +60,4 @@ target/
 # my files:
 local.py
 result.json
+*.pyc

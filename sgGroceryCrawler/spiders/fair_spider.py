@@ -74,4 +74,4 @@ class FairSpider(scrapy.Spider):
             print '>>> We have finished the crawling. Thanks and good night. '
 
 
-        # wrong wrong: should stop at category = 13510
+# wrong wrong: should stop at category = 13510

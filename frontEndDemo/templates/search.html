@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <div id="statistics-table">
+        {% for user in stories %}
+          <div class="row">
+
+              <table style="width:100%">
+                <tr>
+                  <td width="200">
+                    <div height="140" width="140" align="middle">
+                        <img src="{{ user['small_img'] }}"
+                        max-height="100%" max-width="100%" >
+                    </div>
+                  </td>
+
+                  <td width="auto">
+                      <h3>
+                          {{ user['brand'] }}
+                          {{ user['title'] }}
+                      </h3>
+                  </td>
+
+                  <td width="100">
+                    <div>
+                      <font size="10" color="blue">
+                          S${{ user['now_price'] }}
+                      </font>
+                      
+                      {% if user['merchant'] == 'Giant' %}
+                          <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" 
+                          width="60">
+
+                      {% elif user['merchant'] == 'Fairprice' %}
+                          <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" 
+                          width="100">
+
+                      {% elif user['merchant'] == 'Coldstorage' %}
+                          <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" 
+                          width="100">
+
+                      {% end %}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+          </div>
+        {% end %}
+    </div>
+  </body>
+</html>
