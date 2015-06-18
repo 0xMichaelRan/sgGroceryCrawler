@@ -15,32 +15,34 @@ class FairSpider(scrapy.Spider):
         # first step, parse the list of items 
         for sel in response.xpath('//div[@class="products grid_mode"]/div[@class="pr_nlst_wrp"]'):
             item = SggrocerycrawlerItem()
+            
+            availability = sel.xpath('div[@class="pro_stock"]/span/text()').extract()
+            
+            if len(availability) is not 0 and 'Available' in availability[0]:
+                # only process an item if there's 'Available' tag
+                
+                item['title'] = sel.xpath('a[2]/h3/text()').extract()[0]
+                item['small_img'] = sel.xpath('a[1]/p/img/@src').extract()[0]
 
-            item['title'] = sel.xpath('a[2]/h3/text()').extract()[0]
-            item['small_img'] = sel.xpath('a[1]/p/img/@src').extract()[0]
-            
-            #This is small image url
-            #we might be able to 'guess' the smaller and larger image url
-            #look at the pattern below:
-            #http://s3-ap-southeast-1.amazonaws.com/www.fairprice.com.sg/fpol/media/images/product/XL/10274312_XL1.jpg
-            #http://s3-ap-southeast-1.amazonaws.com/www.fairprice.com.sg/fpol/media/images/product/L /10274312_L1.jpg
-            #http://s3-ap-southeast-1.amazonaws.com/www.fairprice.com.sg/fpol/media/images/product/M /10274312_M1.jpg
+                #This is small image url
+                #we might be able to 'guess' the smaller and larger image url
+                #look at the pattern below:
+                #http://s3-ap-southeast-1.amazonaws.com/www.fairprice.com.sg/fpol/media/images/product/XL/10274312_XL1.jpg
+                #http://s3-ap-southeast-1.amazonaws.com/www.fairprice.com.sg/fpol/media/images/product/L /10274312_L1.jpg
+                #http://s3-ap-southeast-1.amazonaws.com/www.fairprice.com.sg/fpol/media/images/product/M /10274312_M1.jpg
 
-            old_price = sel.xpath('div[@class="list_price"]/span/text()').extract()
-            if len(old_price) is not 0:
-                item['old_price'] = old_price[0]
-            
-            item['now_price'] = sel.xpath('span[@class="pl_lst_rt"]/text()').extract()[0]
-            item['prd_url'] = sel.xpath('a[2]/@href').extract()[0]
-            
-            availability = sel.xpath('div[@class="pro_stock"]/span/text()').extract()[0]
-            print 'availability is ' + availability
-            
-            
-            item['merchant'] = "Fairprice"
-            item['website'] = "http://www.fairprice.com.sg"
+                # old_price may not exist
+                old_price = sel.xpath('div[@class="list_price"]/span/text()').extract()
+                if len(old_price) is not 0:
+                    item['old_price'] = old_price[0]
 
-            yield item
+                item['now_price'] = sel.xpath('span[@class="pl_lst_rt"]/text()').extract()[0]
+                item['prd_url'] = sel.xpath('a[2]/@href').extract()[0]
+
+                item['merchant'] = "Fairprice"
+                item['website'] = "http://www.fairprice.com.sg"
+
+                yield item
 
 
         # second step, navigate to the next product list page
@@ -70,3 +72,6 @@ class FairSpider(scrapy.Spider):
         # stop the crawl, cuz we reach the end
         else:
             print '>>> We have finished the crawling. Thanks and good night. '
+
+
+        # wrong wrong: should stop at category = 13510

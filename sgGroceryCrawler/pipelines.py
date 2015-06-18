@@ -82,7 +82,6 @@ class SggrocerycrawlerPipeline(object):
         # MongoDB upsert: update if it is already exist, or insert otherwise.
 
         # last step, print a msg in console
-        log.msg("Grocery item added to MongoDB database!",
-                level=log.DEBUG, spider=spider)
+        print "Grocery item added to MongoDB database!"
 
         return item
