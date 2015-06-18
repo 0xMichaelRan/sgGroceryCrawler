@@ -8,7 +8,7 @@ from scrapy.http import FormRequest
 from sgGroceryCrawler.items import SggrocerycrawlerItem
 
 
-class ColdSpiderSpider(CrawlSpider):
+class ColdSpider(CrawlSpider):
     name = "cold_spider"
     allowed_domains = ["www.coldstorage.com.sg"]
 
@@ -67,7 +67,7 @@ class ColdSpiderSpider(CrawlSpider):
 
             item['prd_code'] = product["product_id"]
 
-            item['merchant'] = "Cold Storage"
+            item['merchant'] = "Coldstorage"
             item['website'] = "http://www.coldstorage.com.sg"
 
             yield item

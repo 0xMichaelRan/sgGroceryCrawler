@@ -46,6 +46,10 @@ class SggrocerycrawlerPipeline(object):
                                 .replace("\n", "")
                                 .strip()
                              )
+                # remove any unnecessary tab, new line or spaces etc.
+                
+                item[prop] = re.sub(r"\s+", " ", item[prop])
+                # replace multiple space with single space
         
         # replace any S$ or $ sign from the price property
         item['old_price'] = item['old_price'].replace("S$", "").replace("$", "")
@@ -55,19 +59,19 @@ class SggrocerycrawlerPipeline(object):
         ts = time.time()
         item['update_time'] = (datetime.datetime.fromtimestamp(ts)
             .strftime('%Y-%m-%d %H:%M:%S'))
-
-        # key is brand + title + merchant
-        item['key'] = (item['brand'].lower() + ' ' + item['title'].lower() + 
-                       ' ' + item['merchant'].lower())
         
-        # replace special chars in either end of title and brand
-        # eg. some brand is '*' and some title ends with '#'
+        # replace special chars in either end of title
+        # eg. some title ends with '#'
         item['title'] = re.sub(r"^\W+", "", item['title'])
         item['title'] = re.sub(r"\W+$", "", item['title'])
 
+        # same for brand, eg. some brand is '*'
         item['brand'] = re.sub(r"^\W+", "", item['brand'])
         item['brand'] = re.sub(r"\W+$", "", item['brand'])
 
+        # key is brand + title + merchant
+        item['key'] = (item['brand'].lower() + ' ' + item['title'].lower() + 
+                       ' ' + item['merchant'].lower()).strip()
 
         # put the item into mongo db (using 'title' as key)
         self.collection.update(
