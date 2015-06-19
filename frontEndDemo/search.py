@@ -1,3 +1,5 @@
+from local import *
+
 import json
 from tornado import ioloop,web
 
@@ -12,7 +14,7 @@ class ItemHandler(web.RequestHandler):
 
 		print 'finding item id = ' + item_id
 
-		connection = pymongo.MongoClient('128.199.103.166', 27017)
+		connection = pymongo.MongoClient(MONGODB_SERVER, 27017)
 		db = connection.sg_grocery
 		items = db.table
 
@@ -28,8 +30,10 @@ class SearchHandler(web.RequestHandler):
     def get(self):
 
 		user_input = self.get_argument("user_input", None, True)
+		if len(user_input) < 3:
+			self.render("index.html")
 
-		connection = pymongo.MongoClient('128.199.103.166', 27017)
+		connection = pymongo.MongoClient(MONGODB_SERVER, 27017)
 		db = connection.sg_grocery
 		items = db.table
 

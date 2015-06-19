@@ -2,6 +2,7 @@ from local import *
 
 # connect to Mongodb
 # MONGODB_SERVER = "localhost"
+# set MONGODB_SERVER in local.js, which is ignored in Git
 MONGODB_PORT = 27017
 MONGODB_DB = "sg_grocery"
 MONGODB_COLLECTION = "table"
@@ -30,7 +31,7 @@ NEWSPIDER_MODULE = 'sgGroceryCrawler.spiders'
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY=3
+DOWNLOAD_DELAY=5
 
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN=16

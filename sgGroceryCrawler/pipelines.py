@@ -70,8 +70,7 @@ class SggrocerycrawlerPipeline(object):
         item['brand'] = re.sub(r"\W+$", "", item['brand'])
 
         # key is brand + title + merchant
-        item['key'] = (item['brand'].lower() + ' ' + item['title'].lower() + 
-                       ' ' + item['merchant'].lower()).strip()
+        item['key'] = (item['brand'].lower() + ' ' + item['title'].lower()).strip()
 
         # put the item into mongo db (using 'title' as key)
         self.collection.update(
