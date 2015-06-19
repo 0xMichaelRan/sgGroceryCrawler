@@ -31,7 +31,9 @@ class SearchHandler(web.RequestHandler):
 
 		user_input = self.get_argument("user_input", None, True)
 		if len(user_input) < 3:
-			self.render("index.html")
+			self.render("index.html", title="Redo your search, please! ")
+		else:
+			user_input = user_input.lower()
 
 		connection = pymongo.MongoClient(MONGODB_SERVER, 27017)
 		db = connection.sg_grocery
