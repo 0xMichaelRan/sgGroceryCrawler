@@ -18,11 +18,14 @@ class ItemHandler(web.RequestHandler):
 		db = connection.sg_grocery
 		items = db.table
 
-		stories = items.find_one({
+		product = items.find_one({
 			'_id': ObjectId(item_id)
 		})
-		self.set_header("Content-Type", "application/json")
-		self.write(json.dumps((stories),default=json_util.default))
+
+		self.render("item.html", title="The item detail", product=product)
+
+		# self.set_header("Content-Type", "application/json")
+		# self.write(json.dumps((products),default=json_util.default))
 
 
 class SearchHandler(web.RequestHandler):
@@ -39,6 +42,6 @@ class SearchHandler(web.RequestHandler):
 		db = connection.sg_grocery
 		items = db.table
 
-		stories = items.find({ 'key': { '$regex' :".*" + user_input + ".*"} })
+		products = items.find({ 'key': { '$regex' :".*" + user_input + ".*"} })
 
-		self.render("search.html", title="Your search result", stories=stories)
+		self.render("search.html", title="Your search result", products=products)

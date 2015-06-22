@@ -32,31 +32,32 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
+    
     <div class="container">
       <div class="row">
-        {% for product in products %}
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="height:350px;">
-            <div class="thumbnail">
-              <a href="item/{{ product['_id'] }}">
-                <img src="{{ product['small_img'] }}" alt="" style="height:200px;">
+        <div class="col-sm-3 col-xs-4">
+          <img class="img-responsive" src="{{ product['small_img'] }}" alt="" width="100%">
+        </div>
+        <div class="col-sm-9 col-xs-8">
+          <div class="thumbnail">
+            <div class="caption-full">
+              <h2>{{ product['brand'] }} {{ product['title'] }}
+              </h2>
+              <br />
+              <p>
+                {{ product['promo'] }}
+              </p>
+              <font size="8" color="blue">{{ product['now_price'] }}</font>
+              <a href="{{ product['website'] }}">
+                {% if product['merchant'] == 'Giant' %}
+                  <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="80"> {% elif product['merchant'] == 'Fairprice' %}
+                  <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="120"> {% elif product['merchant'] == 'Coldstorage' %}
+                  <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="120">
+                {% end %}
               </a>
-              <div class="caption">
-                <font size="6" color="blue" class="pull-right">S${{ product['now_price'] }}</font>
-                <h4><a href="{{ product['website'] }}">
-                  {% if product['merchant'] == 'Giant' %}
-                    <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="80"> {% elif product['merchant'] == 'Fairprice' %}
-                    <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="120"> {% elif product['merchant'] == 'Coldstorage' %}
-                    <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="120">
-                  {% end %}
-                </a>
-                </h4>
-              </div>
-              <div class="caption">
-                <h4><a href="item/{{ product['_id'] }}">{{ product['brand'] }} {{ product['title'] }}</a></h4>
-              </div>
             </div>
           </div>
-        {% end %}
+        </div>
       </div>
     </div>
     
