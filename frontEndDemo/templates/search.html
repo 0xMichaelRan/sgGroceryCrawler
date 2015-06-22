@@ -1,54 +1,77 @@
 <html>
-  <head>
-    <title>{{ title }}</title>
-  </head>
-  <body>
+
+<head>
+    <title>CraiGrocery Home - {{ title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+
+            {% for user in stories %}
+
+            <div class="col-xs-6 col-sm-2" style="height:350px;">
+                <div height="140" width="80" align="middle">
+                    <img src="{{ user['small_img'] }}" max-height="100%" max-width="100%" style="margin:10px 0px">
+                </div>
+                <div>
+                    <font size="6" color="blue">
+                  S${{ user['now_price'] }}
+                  </font>
+
+                    <h5>
+                        {{ user['brand'] }}
+                        {{ user['title'] }}
+                    </h5>
+                {% if user['merchant'] == 'Giant' %}
+                    <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="60"> {% elif user['merchant'] == 'Fairprice' %}
+                    <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="100"> {% elif user['merchant'] == 'Coldstorage' %}
+                    <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="100"> 
+                {% end %}
+                </div>
+            </div>
+            {% end %}
+        </div>
+    </div>
+
+
     <div id="statistics-table">
         {% for user in stories %}
-          <div class="row">
-
-              <table style="width:100%">
+        <div class="row">
+            <table style="width:100%">
                 <tr>
-                  <td width="200">
-                    <div height="140" width="140" align="middle">
-                        <img src="{{ user['small_img'] }}"
-                        max-height="100%" max-width="100%" >
-                    </div>
-                  </td>
-
-                  <td width="auto">
-                      <h3>
-                          {{ user['brand'] }}
-                          {{ user['title'] }}
-                      </h3>
-                  </td>
-
-                  <td width="100">
-                    <div>
-                      <font size="10" color="blue">
-                          S${{ user['now_price'] }}
-                      </font>
-                      
-                      {% if user['merchant'] == 'Giant' %}
-                          <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" 
-                          width="60">
-
-                      {% elif user['merchant'] == 'Fairprice' %}
-                          <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" 
-                          width="100">
-
-                      {% elif user['merchant'] == 'Coldstorage' %}
-                          <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" 
-                          width="100">
-
-                      {% end %}
-                    </div>
-                  </td>
+                    <td width="200">
+                        <div height="140" width="140" align="middle">
+                            <img src="{{ user['small_img'] }}" max-height="100%" max-width="100%">
+                        </div>
+                    </td>
+                    <td width="auto">
+                        <h3>
+                {{ user['brand'] }}
+                {{ user['title'] }}
+                </h3>
+                    </td>
+                    <td width="100">
+                        <div>
+                            <font size="10" color="blue">
+                  S${{ user['now_price'] }}
+                  </font> {% if user['merchant'] == 'Giant' %}
+                            <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="60"> {% elif user['merchant'] == 'Fairprice' %}
+                            <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="100"> {% elif user['merchant'] == 'Coldstorage' %}
+                            <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="100"> {% end %}
+                        </div>
+                    </td>
                 </tr>
-              </table>
-
-          </div>
+            </table>
+        </div>
         {% end %}
     </div>
-  </body>
+</body>
+
 </html>
