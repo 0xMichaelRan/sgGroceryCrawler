@@ -1,5 +1,6 @@
 .bg {
-    background: url('https://dl.dropboxusercontent.com/u/23764314/Fomo/junbotron_bg.jpg') repeat center center;
+    background: url('/static/images/junbotron_bg.jpg') 
+                repeat center center;
     background-size: 100% auto;
     position: fixed;
     width: 100%;

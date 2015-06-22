@@ -12,7 +12,7 @@ class ItemHandler(web.RequestHandler):
 
     def get(self, item_id):
 
-		print 'finding item id = ' + item_id
+		print 'loading item id = ' + item_id
 
 		connection = pymongo.MongoClient(MONGODB_SERVER, 27017)
 		db = connection.sg_grocery
