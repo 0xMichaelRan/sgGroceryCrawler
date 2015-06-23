@@ -18,12 +18,12 @@ class ItemHandler(web.RequestHandler):
     def get(self, item_id):
 
 		print 'loading item id = ' + item_id
-
 		product = items.find_one({
 			'_id': ObjectId(item_id)
 		})
-
-		self.render("item.html", title="The item detail", product=product)
+		self.render("item.html", 
+					page_title="Item: " + product['title'] + " - CraiGrocery", 
+					product=product)
 
 
 class SearchHandler(web.RequestHandler):
@@ -54,10 +54,11 @@ class SearchHandler(web.RequestHandler):
 		# search in Mongo
 		products = (items.find({ 
 						'key': { '$regex' :".*" + keyword + ".*"}
-						}).
-						sort(
+						}).sort(
 							[(sortBy, int(order))]
 						)
 					)
 
-		self.render("search.html", title="Your search result", products=products)
+		self.render("search.html", 
+					page_title="'" + keyword + "' search result - CraiGrocery", 
+					products=products)

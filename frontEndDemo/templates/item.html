@@ -1,68 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>CraiGrocery Home - {{ title }}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!-- customized css/js -->
-    <link rel="stylesheet" href="/static/css/style.css">
-    
-  </head>
-  <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="http://localhost:8888">CraiGrocery.com</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/index">Home <span class="sr-only">(current)</span></a></li>
-            <li><a href="https://www.fomodigital.com/">About Us</a></li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
-    
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3 col-xs-4">
-          <img class="img-responsive" src="{{ product['small_img'] }}" alt="" width="100%">
-        </div>
-        <div class="col-sm-9 col-xs-8">
-          <div class="thumbnail">
-            <div class="caption-full">
-              <h2>{{ product['brand'] }} {{ product['title'] }}
-              </h2>
-              <h2>{{ product['quantity'] }} {{ product['unit'] }}
-              </h2>
-              <br />
-              <p>
-                {{ product['promo'] }}
-              </p>
-              <font size="8" color="blue">{{ product['now_price'] }}</font>
-              <a href="{{ product['website'] }}">
-                {% if product['merchant'] == 'Giant' %}
-                  <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="80"> {% elif product['merchant'] == 'Fairprice' %}
-                  <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="120"> {% elif product['merchant'] == 'Coldstorage' %}
-                  <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="120">
-                {% end %}
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %} {{page_title}} {% end %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3 col-xs-4">
+			<img class="img-responsive" src="{{ product['small_img'] }}" alt="" width="100%">
+		</div>
+		<div class="col-sm-9 col-xs-8">
+			<div class="thumbnail">
+				<div class="caption-full">
+					<h2>{{ product['brand'] }} {{ product['title'] }}
+					</h2>
+					<h2>{{ product['quantity'] }} {{ product['unit'] }}
+					</h2>
+					<br />
+					<p>
+						{{ product['promo'] }}
+					</p>
+					<font size="8" color="blue">S${{ product['now_price'] }}</font>
+					<a href="{{ product['website'] }}">
+						{% if product['merchant'] == 'Giant' %}
+							<img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="80"> {% elif product['merchant'] == 'Fairprice' %}
+							<img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="120"> {% elif product['merchant'] == 'Coldstorage' %}
+							<img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="120">
+						{% end %}
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% end %}
+{% block custm_css_js %}
+<!-- customized css/js -->
+{% end %}

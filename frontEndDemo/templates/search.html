@@ -1,91 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <title>CraiGrocery Home - {{ title }}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!-- customized css/js -->
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/javascript/search_script.js"></script>
-    
-    <script type="text/javascript">
-      
-        // $(document).ready(function() {
-        //     $('#selector button').click(function() {
-        //         $(this).addClass('active').siblings().
-        //           removeClass('active');
-        //         // TODO: insert whatever you want to do with $(this) here
-        //         alert("I am an alert box!");
-        //     });
-        // });
-    </script>
-
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="http://localhost:8888">CraiGrocery.com</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/index">Home <span class="sr-only">(current)</span></a></li>
-            <li><a href="https://www.fomodigital.com/">About Us</a></li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
-
-    <div class="container">
-      <div class="row">
-        <div id="selector" class="btn-group btn-group-lg pull-right" role="group" aria-label="Large button group">
-          <button id="sortNameButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'key');">Name</button>
-          <button id="sortPriceButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'now_price');">Price</button>
-          <button id="sortMerchantButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'merchant');">Merchant</button>
-        </div>
-        <label class="pull-right" style="padding:10px; 10px">Sort by: </label>
-      </div>
-
-      <div class="row">
-        {% for product in products %}
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="height:350px;">
-            <div class="thumbnail">
-              <a href="item/{{ product['_id'] }}">
-                <img src="{{ product['small_img'] }}" alt="" style="height:200px;">
-              </a>
-              <div class="caption">
-                <font size="6" color="blue" class="pull-right">S${{ product['now_price'] }}</font>
-                <h4><a href="{{ product['website'] }}">
-                  {% if product['merchant'] == 'Giant' %}
-                    <img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="80"> {% elif product['merchant'] == 'Fairprice' %}
-                    <img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="120"> {% elif product['merchant'] == 'Coldstorage' %}
-                    <img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="120">
-                  {% end %}
-                </a>
-                </h4>
-              </div>
-              <div class="caption">
-                <h4><a href="item/{{ product['_id'] }}">{{ product['brand'] }} {{ product['title'] }}</a></h4>
-              </div>
-            </div>
-          </div>
-        {% end %}
-      </div>
-    </div>
-    
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %} {{page_title}} {% end %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div id="selector" class="btn-group btn-group-lg pull-right" role="group" aria-label="Large button group">
+			<button id="sortNameButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'key');">Name</button>
+			<button id="sortPriceButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'now_price');">Price</button>
+			<button id="sortMerchantButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'merchant');">Merchant</button>
+		</div>
+		<label class="pull-right" style="padding:10px; 10px">Sort by: </label>
+	</div>
+	<div class="row">
+		{% for product in products %}
+			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="height:350px;">
+				<div class="thumbnail">
+					<a href="item/{{ product['_id'] }}">
+						<img src="{{ product['small_img'] }}" alt="" style="height:200px;">
+					</a>
+					<div class="caption">
+						<font size="6" color="blue" class="pull-right">S${{ product['now_price'] }}</font>
+						<h4><a href="{{ product['website'] }}">
+							{% if product['merchant'] == 'Giant' %}
+								<img src="https://giantonline.com.sg/media/css/images/custom/logo.png" width="80"> {% elif product['merchant'] == 'Fairprice' %}
+								<img src="http://www.greatnewplaces.com/images/Stores/img1861_04052011115309.jpeg" width="120"> {% elif product['merchant'] == 'Coldstorage' %}
+								<img src="http://files.campus.edublogs.org/blog.nus.edu.sg/dist/4/2292/files/2012/08/cs_logo_w_colour_code_-1d5b28d.jpg" width="120">
+							{% end %}
+						</a>
+						</h4>
+					</div>
+					<div class="caption">
+						<h4><a href="item/{{ product['_id'] }}">{{ product['brand'] }} {{ product['title'] }}</a></h4>
+					</div>
+				</div>
+			</div>
+		{% end %}
+	</div>
+</div>
+{% end %}
+{% block custm_css_js %}
+<!-- customized css/js -->
+<script src="/static/javascript/search_script.js"></script>
+{% end %}
