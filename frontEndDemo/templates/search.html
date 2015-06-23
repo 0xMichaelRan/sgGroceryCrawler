@@ -10,7 +10,20 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <!-- customized css/js -->
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/javascript/script.js"></script>
+    <script src="/static/javascript/search_script.js"></script>
+    
+    <script type="text/javascript">
+      
+        // $(document).ready(function() {
+        //     $('#selector button').click(function() {
+        //         $(this).addClass('active').siblings().
+        //           removeClass('active');
+        //         // TODO: insert whatever you want to do with $(this) here
+        //         alert("I am an alert box!");
+        //     });
+        // });
+    </script>
+
   </head>
 
   <body>
@@ -39,13 +52,14 @@
 
     <div class="container">
       <div class="row">
-        <div class="btn-group btn-group-lg pull-right" role="group" aria-label="Large button group">
-          <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'key');">Name</button>
-          <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'now_price');">Price</button>
-          <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'merchant');">Merchant</button>
+        <div id="selector" class="btn-group btn-group-lg pull-right" role="group" aria-label="Large button group">
+          <button id="sortNameButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'key');">Name</button>
+          <button id="sortPriceButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'now_price');">Price</button>
+          <button id="sortMerchantButton" type="button" class="btn btn-default" onclick="location.href = modify_Url_parameter('sort', 'merchant');">Merchant</button>
         </div>
         <label class="pull-right" style="padding:10px; 10px">Sort by: </label>
       </div>
+
       <div class="row">
         {% for product in products %}
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="height:350px;">
@@ -72,10 +86,6 @@
         {% end %}
       </div>
     </div>
-    
-    <script>
-
-    </script>
     
   </body>
 </html>

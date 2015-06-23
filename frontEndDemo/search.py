@@ -7,6 +7,11 @@ import pymongo
 from bson import json_util
 from bson.objectid import ObjectId
 
+# Mongo setting
+connection = pymongo.MongoClient(MONGODB_SERVER, MONGODB_PORT)
+db = connection.sg_grocery
+items = db.table
+
 
 class ItemHandler(web.RequestHandler):
 
@@ -14,18 +19,11 @@ class ItemHandler(web.RequestHandler):
 
 		print 'loading item id = ' + item_id
 
-		connection = pymongo.MongoClient(MONGODB_SERVER, 27017)
-		db = connection.sg_grocery
-		items = db.table
-
 		product = items.find_one({
 			'_id': ObjectId(item_id)
 		})
 
 		self.render("item.html", title="The item detail", product=product)
-
-		# self.set_header("Content-Type", "application/json")
-		# self.write(json.dumps((products),default=json_util.default))
 
 
 class SearchHandler(web.RequestHandler):
@@ -52,10 +50,6 @@ class SearchHandler(web.RequestHandler):
 
 		print ('loading search result = ' + keyword + ' sortby ' + sortBy + 
 				" in order of " + order)
-
-		connection = pymongo.MongoClient(MONGODB_SERVER, 27017)
-		db = connection.sg_grocery
-		items = db.table
 
 		# search in Mongo
 		products = (items.find({ 

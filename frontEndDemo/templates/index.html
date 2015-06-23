@@ -10,10 +10,11 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <!-- customized css/js -->
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/javascript/script.js"></script>
+    <script src="/static/javascript/index_script.js"></script>
+
 </head>
 
-<body>
+<body onload="FocusOnInput()">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -47,7 +48,9 @@
             <form class="form-horizontal" role="form" action="/search" method="get">
                 <div class="form-group">
                     <div class="col-sm-offset-2  col-sm-7">
-                        <input type="text" class="form-control input-lg" name="keyword" placeholder="eg. banana">
+                        <input id="mainInputBox" type="text" class="form-control input-lg" name="keyword" placeholder="eg. banana">
+                        <input type="hidden" name="sort" value="key">
+                        <input type="hidden" name="order" value="1">
                     </div>
                     <div class="col-sm-1">
                         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
