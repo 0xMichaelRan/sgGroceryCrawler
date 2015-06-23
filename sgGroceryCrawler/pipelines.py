@@ -26,8 +26,12 @@ class SggrocerycrawlerPipeline(object):
     def process_item(self, item, spider):
 
         # if product title is empty, discard
-    	if not item or len(item['title']) == 0:
-    		raise DropItem("Missing title, %s" % item)
+        if not item or len(item['title']) == 0:
+            raise DropItem("Missing title, %s" % item)
+        
+        # if product price is empty, discard
+        if not item or len(item['now_price']) == 0:
+            raise DropItem("Missing price, %s" % item)
         
         # if is a valid item, then we process the string data
         array = ['title', 'brand', 'quantity', 'unit', 

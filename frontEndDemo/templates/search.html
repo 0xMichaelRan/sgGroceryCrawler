@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <title>CraiGrocery Home - {{ title }}</title>
     <meta charset="utf-8">
@@ -7,10 +8,13 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!-- customized css -->
-    <link rel="stylesheet" href="static/css/style.css">
+    <!-- customized css/js -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/javascript/script.js"></script>
   </head>
+
   <body>
+
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -32,6 +36,7 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
+
     <div class="container">
       <div class="row">
         <div class="btn-group btn-group-lg pull-right" role="group" aria-label="Large button group">
@@ -70,29 +75,8 @@
     </div>
     
     <script>
-    function sortBy() {
-      window.location.search += '&sort=42'
-    }
 
-    function URL_add_parameter(url, param, value){
-      var hash       = {};
-      var parser     = document.createElement('a');
-      parser.href    = url;
-      var parameters = parser.search.split(/\?|&/);
-      for(var i=0; i < parameters.length; i++) {
-        if(!parameters[i])
-          continue;
-        var ary      = parameters[i].split('=');
-        hash[ary[0]] = ary[1];
-      }
-      hash[param] = value;
-      var list = [];
-      Object.keys(hash).forEach(function (key) {
-        list.push(key + '=' + hash[key]);
-      });
-      parser.search = '?' + list.join('&');
-      return parser.href;
-    }
     </script>
+    
   </body>
 </html>

@@ -32,16 +32,24 @@ class SearchHandler(web.RequestHandler):
 
     def get(self):
 
-		user_input = self.get_argument("user_input", None, True)
-		if len(user_input) < 3:
+		keyword = self.get_argument("keyword", None, True)
+		sortBy = self.get_argument("sort", "", True)
+		print 'loading search result = ' + keyword + ' sortby ' + sortBy
+
+		if len(keyword) < 3:
 			self.render("index.html", title="Redo your search, please! ")
 		else:
-			user_input = user_input.lower()
+			keyword = keyword.lower()
 
 		connection = pymongo.MongoClient(MONGODB_SERVER, 27017)
 		db = connection.sg_grocery
 		items = db.table
 
-		products = items.find({ 'key': { '$regex' :".*" + user_input + ".*"} })
+		if sortBy == 'price':
+			products = items.find({ 'key': { '$regex' :".*" + keyword + ".*"} }).sort([("now_price", 1), ])
+		elif sortBy == 'merchant':
+			products = items.find({ 'key': { '$regex' :".*" + keyword + ".*"} }).sort([("merchant", 1), ])
+		else:
+			products = items.find({ 'key': { '$regex' :".*" + keyword + ".*"} }).sort([("key", 1), ])
 
 		self.render("search.html", title="Your search result", products=products)
