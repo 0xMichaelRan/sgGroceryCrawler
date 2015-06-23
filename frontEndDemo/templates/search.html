@@ -40,12 +40,11 @@
     <div class="container">
       <div class="row">
         <div class="btn-group btn-group-lg pull-right" role="group" aria-label="Large button group">
-          <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'name');">Name</button>
-          <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'price');">Price</button>
+          <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'key');">Name</button>
+          <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'now_price');">Price</button>
           <button type="button" class="btn btn-default" onclick="location.href = URL_add_parameter(location.href, 'sort', 'merchant');">Merchant</button>
         </div>
         <label class="pull-right" style="padding:10px; 10px">Sort by: </label>
-        <button onclick="location.href = URL_add_parameter(location.href, 'user_input', 'banana');">ALERT ME</button>
       </div>
       <div class="row">
         {% for product in products %}
