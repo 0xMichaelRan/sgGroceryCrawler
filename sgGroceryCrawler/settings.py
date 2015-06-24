@@ -2,8 +2,8 @@ from local import *
 
 # connect to Mongodb
 # MONGODB_SERVER = "localhost"
-# set MONGODB_SERVER in local.js, which is ignored in Git
-MONGODB_PORT = 27017
+# set MONGODB_SERVER and MONGODB_PORT in local.js, 
+# which is ignored in Git
 MONGODB_DB = "sg_grocery"
 MONGODB_COLLECTION = "table"
 
